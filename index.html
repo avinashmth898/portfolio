@@ -828,6 +828,24 @@
     color: var(--text);
     letter-spacing: 0.03em;
     transition: all 0.25s var(--ease-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .skill-pill img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0.85);
+    transition: filter 0.25s;
+  }
+  .skill-pill svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.25s;
   }
   .skill-pill:hover {
     background: rgba(0,229,255,0.1);
@@ -836,6 +854,8 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0,229,255,0.12);
   }
+  .skill-pill:hover img { filter: brightness(1.2); }
+  .skill-pill:hover svg { opacity: 1; }
 
   /* ============ PROJECTS ============ */
   .projects-wrap { padding: 100px 60px; }
@@ -953,6 +973,82 @@
   .project-card-wide { grid-column: 1 / -1; }
   .project-card-wide .exp-bullets { margin: 20px 0 28px; }
   .project-desc + .project-desc { margin-top: -12px; }
+
+  /* ============ COMPANY / COLLEGE LOGO STYLES ============ */
+  .card-logo-bg {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    width: 180px; height: 180px;
+    object-fit: contain;
+    opacity: 0.04;
+    pointer-events: none;
+    filter: grayscale(1) brightness(3);
+    transition: opacity 0.4s var(--ease-soft);
+    user-select: none;
+  }
+  .card-logo-bg.logo-top { top: 16px; right: 16px; transform: none; width: 130px; height: 130px; }
+  .exp-card:hover .card-logo-bg,
+  .edu-card:hover .card-logo-bg,
+  .project-card:hover .card-logo-bg { opacity: 0.09; }
+
+  .company-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .company-logo-box {
+    width: 46px; height: 46px;
+    border: 1px solid var(--border-strong);
+    background: rgba(255,255,255,0.04);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    padding: 8px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .exp-card:hover .company-logo-box,
+  .edu-card:hover .company-logo-box { background: rgba(0,229,255,0.06); border-color: rgba(0,229,255,0.3); }
+  .company-logo-box img, .company-logo-box svg {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    filter: grayscale(1) brightness(2);
+    opacity: 0.65;
+    transition: filter 0.3s, opacity 0.3s;
+  }
+  .exp-card:hover .company-logo-box img,
+  .exp-card:hover .company-logo-box svg,
+  .edu-card:hover .company-logo-box img,
+  .edu-card:hover .company-logo-box svg { filter: grayscale(0) brightness(1); opacity: 1; }
+
+  .tag { display: inline-flex; align-items: center; gap: 5px; }
+  .tag img, .tag svg { width: 11px; height: 11px; object-fit: contain; opacity: 0.55; flex-shrink: 0; transition: opacity 0.25s; }
+  .tag:hover img, .tag:hover svg { opacity: 1; }
+
+  .project-logo-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .project-logo-chip img, .project-logo-chip svg { width: 14px; height: 14px; object-fit: contain; opacity: 0.7; }
+
+  .stack-icons { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+  .stack-icon-item {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 10px; color: var(--muted); letter-spacing: 0.04em;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    transition: all 0.25s var(--ease-soft);
+  }
+  .stack-icon-item:hover { color: var(--accent); border-color: rgba(0,229,255,0.2); background: rgba(0,229,255,0.04); }
+  .stack-icon-item img, .stack-icon-item svg { width: 14px; height: 14px; object-fit: contain; }
 
   /* ============ TECH ILLUSTRATIONS (ECU / CAN BUS) ============ */
   .tech-illustration-grid {
@@ -1454,12 +1550,39 @@
   <div class="exp-grid">
     <div class="exp-card reveal tilt">
       <div class="spotlight"></div>
-      <div class="exp-top">
+      <!-- Veoneer background watermark -->
+      <img class="card-logo-bg logo-top" src="https://cdn.simpleicons.org/automotive/ffffff" alt="" aria-hidden="true"
+        onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 60%22><text y=%2245%22 font-size=%2228%22 font-family=%22Arial%22 fill=%22white%22 opacity=%220.5%22>VNR</text></svg>'"/>
+      <div class="company-header">
+        <div class="company-logo-box">
+          <!-- Veoneer custom SVG monogram (no public brand icon available) -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="4" fill="rgba(0,100,200,0.15)"/>
+            <text x="24" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#0064c8">V</text>
+            <rect x="6" y="38" width="36" height="2" rx="1" fill="#0064c8" opacity="0.6"/>
+          </svg>
+        </div>
         <div>
           <div class="exp-company">Veoneer Safety Systems</div>
           <div class="exp-role">Software Engineer — Embedded Testing</div>
         </div>
-        <div class="exp-date">Jul 2023 — Sep 2025<br/>Bengaluru, IN</div>
+        <div class="exp-date" style="margin-left:auto">Apr 2023 — Jan 2026<br/>Bengaluru, IN</div>
+      </div>
+      <div class="stack-icons">
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/cplusplus/6b7a8d" alt="C++"/>C++</span>
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/python/6b7a8d" alt="Python"/>Python</span>
+        <span class="stack-icon-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><path d="M4 12h16M4 12l4-4M4 12l4 4M20 12l-4-4M20 12l-4 4"/></svg>CAN/LIN/UDS
+        </span>
+        <span class="stack-icon-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h8"/></svg>CANoe
+        </span>
+        <span class="stack-icon-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>HIL Testing
+        </span>
+        <span class="stack-icon-item">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>IBM DOORS
+        </span>
       </div>
       <ul class="exp-bullets">
         <li>Validated 200+ ECUs across 10+ modules using CAN, LIN &amp; UDS protocols; resolved 45+ critical defects, reducing post-production failures by 15%.</li>
@@ -1468,23 +1591,46 @@
         <li>Maintained 100% ISO 26262 functional safety compliance via IBM DOORS requirements traceability; accelerated ASPICE reporting efficiency.</li>
       </ul>
       <div class="exp-tags">
-        <span class="tag">CANoe</span>
-        <span class="tag">CAN/LIN/UDS</span>
-        <span class="tag">HIL Testing</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/cplusplus/6b7a8d" alt=""/>CANoe</span>
+        <span class="tag">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12l4-4M4 12l4 4M20 12l-4-4M20 12l-4 4"/></svg>CAN/LIN/UDS
+        </span>
+        <span class="tag">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>HIL Testing
+        </span>
         <span class="tag">ISO 26262</span>
-        <span class="tag">IBM DOORS</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/ibm/6b7a8d" alt="IBM"/>IBM DOORS</span>
         <span class="tag">Scalexio</span>
       </div>
     </div>
 
     <div class="exp-card reveal tilt">
       <div class="spotlight"></div>
-      <div class="exp-top">
+      <!-- Subex background watermark monogram -->
+      <svg class="card-logo-bg logo-top" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <text x="10" y="50" font-size="56" font-weight="800" font-family="Arial,sans-serif" fill="white" opacity="1">Sx</text>
+      </svg>
+      <div class="company-header">
+        <div class="company-logo-box">
+          <!-- Subex custom SVG logo mark -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="4" fill="rgba(0,180,120,0.12)"/>
+            <text x="24" y="32" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="800" fill="#00b478">SUB</text>
+            <path d="M10 36 Q24 42 38 36" stroke="#00b478" stroke-width="1.5" fill="none" opacity="0.6"/>
+          </svg>
+        </div>
         <div>
           <div class="exp-company">Subex</div>
           <div class="exp-role">Software Engineer</div>
         </div>
-        <div class="exp-date">Jun 2022 — Jul 2023<br/>Bengaluru, IN</div>
+        <div class="exp-date" style="margin-left:auto">Jun 2022 — Jul 2023<br/>Bengaluru, IN</div>
+      </div>
+      <div class="stack-icons">
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/openjdk/6b7a8d" alt="Java"/>Java</span>
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/springboot/6b7a8d" alt="Spring Boot"/>Spring Boot</span>
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/elasticsearch/6b7a8d" alt="ELK"/>ELK Stack</span>
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/git/6b7a8d" alt="Git"/>Git</span>
+        <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/jira/6b7a8d" alt="JIRA"/>JIRA</span>
       </div>
       <ul class="exp-bullets">
         <li>Developed a GC-based monitoring module for Hypersense DMS — optimized Big Data analytics throughput 25%, reduced memory overhead 15% via real-time dashboards.</li>
@@ -1492,12 +1638,12 @@
         <li>Streamlined delivery via Git &amp; JIRA within Agile/Scrum — 20% sprint velocity increase, 95% on-time delivery of critical features.</li>
       </ul>
       <div class="exp-tags">
-        <span class="tag">Java</span>
-        <span class="tag">RESTful APIs</span>
-        <span class="tag">Microservices</span>
-        <span class="tag">Big Data</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/openjdk/6b7a8d" alt=""/>Java</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/nginx/6b7a8d" alt=""/>RESTful APIs</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/apachekafka/6b7a8d" alt=""/>Microservices</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/apachehadoop/6b7a8d" alt=""/>Big Data</span>
         <span class="tag">ETL</span>
-        <span class="tag">Git</span>
+        <span class="tag"><img src="https://cdn.simpleicons.org/git/6b7a8d" alt=""/>Git</span>
       </div>
     </div>
   </div>
@@ -1512,13 +1658,36 @@
   </div>
   <div class="edu-card reveal tilt">
     <div class="spotlight"></div>
-    <div class="edu-top">
-      <div class="edu-badge">🎓</div>
+    <!-- IIIT watermark -->
+    <svg class="card-logo-bg logo-top" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <text x="8" y="62" font-size="52" font-weight="900" font-family="Georgia,serif" fill="white" opacity="1">IIIT</text>
+    </svg>
+    <div class="company-header">
+      <div class="company-logo-box">
+        <!-- IIIT Dharwad custom SVG crest-style mark -->
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="48" height="48" rx="4" fill="rgba(120,80,200,0.12)"/>
+          <!-- book -->
+          <path d="M12 34V16a2 2 0 012-2h8v20H14a2 2 0 00-2 2z" fill="rgba(120,80,200,0.4)" stroke="#7c3aed" stroke-width="1.2"/>
+          <path d="M36 34V16a2 2 0 00-2-2h-8v20h8a2 2 0 012 2z" fill="rgba(120,80,200,0.4)" stroke="#7c3aed" stroke-width="1.2"/>
+          <line x1="24" y1="14" x2="24" y2="36" stroke="#7c3aed" stroke-width="1.5"/>
+          <!-- flame / lamp above -->
+          <path d="M24 8 Q26 11 24 13 Q22 11 24 8Z" fill="#f59e0b"/>
+        </svg>
+      </div>
       <div>
         <div class="edu-institute">Indian Institute of Information Technology, Dharwad</div>
         <div class="edu-degree">B.Tech in Computer Science &amp; Engineering — Karnataka, India</div>
       </div>
-      <div class="edu-date">2018 — 2022<br/>Batch of 2022</div>
+      <div class="edu-date" style="margin-left:auto">2018 — 2022<br/>Batch of 2022</div>
+    </div>
+    <div class="stack-icons">
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/openjdk/6b7a8d" alt="Java"/>Java</span>
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/cplusplus/6b7a8d" alt="C++"/>C++</span>
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/python/6b7a8d" alt="Python"/>Python</span>
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/mysql/6b7a8d" alt="MySQL"/>MySQL</span>
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/react/6b7a8d" alt="React"/>React</span>
+      <span class="stack-icon-item"><img src="https://cdn.simpleicons.org/nodedotjs/6b7a8d" alt="Node"/>Node.js</span>
     </div>
     <p class="edu-desc">
       Graduated as part of the <strong>2022 batch</strong> from one of India's premier IIITs, built on core CS
@@ -1565,65 +1734,88 @@
       <div class="spotlight"></div>
       <div class="skill-cat-name">Languages</div>
       <div class="skill-list">
-        <span class="skill-pill">Java</span>
-        <span class="skill-pill">C</span>
-        <span class="skill-pill">C++</span>
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">C#</span>
-        <span class="skill-pill">JavaScript</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/openjdk/00e5ff" alt="Java"/>Java</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/c/00e5ff" alt="C"/>C</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/cplusplus/00e5ff" alt="C++"/>C++</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/python/00e5ff" alt="Python"/>Python</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/csharp/00e5ff" alt="C#"/>C#</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/javascript/00e5ff" alt="JavaScript"/>JavaScript</span>
       </div>
     </div>
     <div class="skill-cat reveal tilt-soft">
       <div class="spotlight"></div>
       <div class="skill-cat-name">Frameworks</div>
       <div class="skill-list">
-        <span class="skill-pill">Spring Boot</span>
-        <span class="skill-pill">RESTful API</span>
-        <span class="skill-pill">Microservices</span>
-        <span class="skill-pill">React</span>
-        <span class="skill-pill">Spring Data JPA</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/springboot/00e5ff" alt="Spring Boot"/>Spring Boot</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/react/00e5ff" alt="React"/>React</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/apachekafka/00e5ff" alt="REST"/>RESTful API</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/hibernate/00e5ff" alt="JPA"/>Spring Data JPA</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/nginx/00e5ff" alt="Microservices"/>Microservices</span>
       </div>
     </div>
     <div class="skill-cat reveal tilt-soft">
       <div class="spotlight"></div>
       <div class="skill-cat-name">DevOps &amp; Tools</div>
       <div class="skill-list">
-        <span class="skill-pill">Git</span>
-        <span class="skill-pill">CI/CD</span>
-        <span class="skill-pill">Maven</span>
-        <span class="skill-pill">JIRA</span>
-        <span class="skill-pill">Agile/Scrum</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/git/00e5ff" alt="Git"/>Git</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/githubactions/00e5ff" alt="CI/CD"/>CI/CD</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/apachemaven/00e5ff" alt="Maven"/>Maven</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/jira/00e5ff" alt="JIRA"/>JIRA</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/postman/00e5ff" alt="Postman"/>Postman</span>
       </div>
     </div>
     <div class="skill-cat reveal tilt-soft">
       <div class="spotlight"></div>
       <div class="skill-cat-name">Embedded &amp; Auto</div>
       <div class="skill-list">
-        <span class="skill-pill">CANoe</span>
-        <span class="skill-pill">HIL Testing</span>
-        <span class="skill-pill">CAN/LIN/UDS</span>
-        <span class="skill-pill">Control Desk</span>
-        <span class="skill-pill">IBM DOORS</span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h8"/></svg>CANoe
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>HIL Testing
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12l4-4M4 12l4 4M20 12l-4-4M20 12l-4 4"/></svg>CAN/LIN/UDS
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>Control Desk
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/></svg>IBM DOORS
+        </span>
       </div>
     </div>
     <div class="skill-cat reveal tilt-soft">
       <div class="spotlight"></div>
       <div class="skill-cat-name">Core CS</div>
       <div class="skill-list">
-        <span class="skill-pill">DSA</span>
-        <span class="skill-pill">Schema Design</span>
-        <span class="skill-pill">MySQL</span>
-        <span class="skill-pill">Manual Testing</span>
-        <span class="skill-pill">STLC</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/mysql/00e5ff" alt="MySQL"/>MySQL</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/elasticsearch/00e5ff" alt="Elasticsearch"/>Elasticsearch</span>
+        <span class="skill-pill"><img src="https://cdn.simpleicons.org/kibana/00e5ff" alt="Kibana"/>Kibana</span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>DSA
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Schema Design
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Manual Testing
+        </span>
       </div>
     </div>
     <div class="skill-cat reveal tilt-soft">
       <div class="spotlight"></div>
       <div class="skill-cat-name">Achievements</div>
       <div class="skill-list">
-        <span class="skill-pill">SIH 2020 Team</span>
-        <span class="skill-pill">IIIT Dharwad '22</span>
-        <span class="skill-pill">6-Member Lead Contributor</span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>SIH 2020 Team
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>IIIT Dharwad '22
+        </span>
+        <span class="skill-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Lead Contributor
+        </span>
       </div>
     </div>
   </div>
@@ -1642,6 +1834,18 @@
   <div class="projects-grid">
     <div class="project-card reveal tilt project-card-wide">
       <div class="project-num">01</div>
+      <!-- Freelance watermark -->
+      <img class="card-logo-bg" src="https://cdn.simpleicons.org/springboot/ffffff" alt="" aria-hidden="true" style="opacity:0.03;right:20px;top:20px;transform:none;width:120px;height:120px;"/>
+      <div class="project-logo-chip">
+        <img src="https://cdn.simpleicons.org/springboot/6b7a8d" alt="Spring Boot"/>Spring Boot
+      </div>
+      <div class="project-logo-chip" style="margin-left:6px">
+        <img src="https://cdn.simpleicons.org/react/6b7a8d" alt="React"/>React
+      </div>
+      <div class="project-logo-chip" style="margin-left:6px">
+        <img src="https://cdn.simpleicons.org/mysql/6b7a8d" alt="MySQL"/>MySQL
+      </div>
+      <br/><br/>
       <div class="project-title">School Management Tool</div>
       <p class="project-desc">
         Full-Stack CRM built on Spring Boot &amp; React with a decoupled RESTful architecture.
@@ -1689,7 +1893,24 @@
   <div class="projects-grid">
     <div class="project-card reveal tilt project-card-wide">
       <div class="project-num">02</div>
-      <div class="project-badge">🚗 HIL / Vector CANoe</div>
+      <!-- Vector/CANoe watermark -->
+      <svg class="card-logo-bg" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="opacity:0.04;right:16px;top:20px;transform:none;width:140px;height:70px;">
+        <text x="4" y="48" font-size="44" font-weight="900" font-family="Arial,sans-serif" fill="white">VEC</text>
+      </svg>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01"/></svg>Vector CANoe
+        </div>
+        <div class="project-logo-chip">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>HIL / Scalexio
+        </div>
+        <div class="project-logo-chip">
+          <img src="https://cdn.simpleicons.org/cplusplus/6b7a8d" alt="C++"/>CAPL / C++
+        </div>
+        <div class="project-logo-chip">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>IBM DOORS
+        </div>
+      </div>
       <div class="project-title">HIL-Based ECU Validation &amp; Vector CANoe Test Automation</div>
       <p class="project-desc">
         <strong>The problem:</strong> Validating an ECU only on the bench with real hardware neighbors is slow,
@@ -1837,6 +2058,24 @@
   <div class="projects-grid">
     <div class="project-card reveal tilt">
       <div class="project-num">03</div>
+      <!-- IIIT watermark -->
+      <svg class="card-logo-bg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="opacity:0.04;right:16px;top:20px;transform:none;width:120px;height:80px;">
+        <text x="4" y="62" font-size="52" font-weight="900" font-family="Georgia,serif" fill="white">IIIT</text>
+      </svg>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip">
+          <img src="https://cdn.simpleicons.org/react/6b7a8d" alt="React"/>React.js
+        </div>
+        <div class="project-logo-chip">
+          <img src="https://cdn.simpleicons.org/nodedotjs/6b7a8d" alt="Node"/>Node.js
+        </div>
+        <div class="project-logo-chip">
+          <img src="https://cdn.simpleicons.org/mongodb/6b7a8d" alt="MongoDB"/>MongoDB
+        </div>
+        <div class="project-logo-chip">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6b7a8d" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Kotlin (Android)
+        </div>
+      </div>
       <div class="project-badge badge-college">🇮🇳 Smart India Hackathon 2020</div>
       <div class="project-title">STET Exam Management System</div>
       <p class="project-desc">
@@ -1881,6 +2120,10 @@
   <div class="projects-grid">
     <div class="project-card reveal tilt">
       <div class="project-num">04</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/python/6b7a8d" alt="Python"/>Python</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/openai/6b7a8d" alt="LLM"/>LLM Agents</div>
+      </div>
       <div class="project-badge">🤖 Agentic AI</div>
       <div class="project-title">Agentic AI Task Automation</div>
       <p class="project-desc">
@@ -1902,6 +2145,11 @@
 
     <div class="project-card reveal tilt">
       <div class="project-num">05</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/python/6b7a8d" alt="Python"/>Python</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/pandas/6b7a8d" alt="Pandas"/>Pandas</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/mysql/6b7a8d" alt="SQL"/>SQL</div>
+      </div>
       <div class="project-badge">🔄 Data Engineering</div>
       <div class="project-title">ETL Data Pipeline</div>
       <p class="project-desc">
@@ -1925,6 +2173,11 @@
 
     <div class="project-card reveal tilt">
       <div class="project-num">06</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/elasticsearch/6b7a8d" alt="ES"/>Elasticsearch</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/logstash/6b7a8d" alt="Logstash"/>Logstash</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/kibana/6b7a8d" alt="Kibana"/>Kibana</div>
+      </div>
       <div class="project-badge">📊 Observability</div>
       <div class="project-title">ELK Log Monitoring Pipeline</div>
       <p class="project-desc">
@@ -1947,6 +2200,11 @@
 
     <div class="project-card reveal tilt">
       <div class="project-num">07</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;position:relative;">
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/python/6b7a8d" alt="Python"/>Python</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/pytorch/6b7a8d" alt="ML"/>PyTorch / ML</div>
+        <div class="project-logo-chip"><img src="https://cdn.simpleicons.org/scikitlearn/6b7a8d" alt="sklearn"/>Scikit-learn</div>
+      </div>
       <div class="project-badge">🧠 AI / ML</div>
       <div class="project-title">AI-Powered Document Intelligence</div>
       <p class="project-desc">
